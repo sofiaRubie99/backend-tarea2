@@ -1,46 +1,51 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
-const cors = require('cors');
 
 let authors = [];
 let books = [];
 let publishers = [];
 
-
+// Obtener la ruta absoluta para los archivos JSON
 const authorsFilePath = path.join(__dirname, 'authors.json');
 const booksFilePath = path.join(__dirname, 'books.json');
 const publishersFilePath = path.join(__dirname, 'publishers.json');
 
-
 // Cargar datos desde archivos JSON
-const loadAuthors = () => {
-    fs.readFile(authorsFilePath, 'utf8', (err, data) => {
-        if (!err) {
-            authors = JSON.parse(data);
-        }
-    });
+const loadAuthors = async () => {
+    try {
+        const data = await fs.readFile(authorsFilePath, 'utf8');
+        authors = JSON.parse(data);
+    } catch (err) {
+        console.error('Error loading authors:', err);
+    }
 };
 
-const loadBooks = () => {
-    fs.readFile(booksFilePath, 'utf8', (err, data) => {
-        if (!err) {
-            books = JSON.parse(data);
-        }
-    });
+const loadBooks = async () => {
+    try {
+        const data = await fs.readFile(booksFilePath, 'utf8');
+        books = JSON.parse(data);
+    } catch (err) {
+        console.error('Error loading books:', err);
+    }
 };
 
-const loadPublishers = () => {
-    fs.readFile(publishersFilePath, 'utf8', (err, data) => {
-        if (!err) {
-            publishers = JSON.parse(data);
-        }
-    });
+const loadPublishers = async () => {
+    try {
+        const data = await fs.readFile(publishersFilePath, 'utf8');
+        publishers = JSON.parse(data);
+    } catch (err) {
+        console.error('Error loading publishers:', err);
+    }
 };
 
 // Cargar los datos al iniciar la función
-loadAuthors();
-loadBooks();
-loadPublishers();
+const loadData = async () => {
+    await loadAuthors();
+    await loadBooks();
+    await loadPublishers();
+};
+
+loadData();
 
 // Manejar la función Lambda
 exports.handler = async (event) => {
