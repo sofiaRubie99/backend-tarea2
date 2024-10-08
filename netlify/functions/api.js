@@ -1,13 +1,20 @@
 const fs = require('fs');
+const path = require('path');
 const cors = require('cors');
 
 let authors = [];
 let books = [];
 let publishers = [];
 
+
+const authorsFilePath = path.join(__dirname, 'authors.json');
+const booksFilePath = path.join(__dirname, 'books.json');
+const publishersFilePath = path.join(__dirname, 'publishers.json');
+
+
 // Cargar datos desde archivos JSON
 const loadAuthors = () => {
-    fs.readFile('./authors.json', 'utf8', (err, data) => {
+    fs.readFile(authorsFilePath, 'utf8', (err, data) => {
         if (!err) {
             authors = JSON.parse(data);
         }
@@ -15,7 +22,7 @@ const loadAuthors = () => {
 };
 
 const loadBooks = () => {
-    fs.readFile('./books.json', 'utf8', (err, data) => {
+    fs.readFile(booksFilePath, 'utf8', (err, data) => {
         if (!err) {
             books = JSON.parse(data);
         }
@@ -23,7 +30,7 @@ const loadBooks = () => {
 };
 
 const loadPublishers = () => {
-    fs.readFile('./publishers.json', 'utf8', (err, data) => {
+    fs.readFile(publishersFilePath, 'utf8', (err, data) => {
         if (!err) {
             publishers = JSON.parse(data);
         }
