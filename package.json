@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Tarea 2",
+  "main": "netlify/functions/api.js",
+  "scripts": {
+    "start": "nodemon netlify/functions/api.js"
+  },
+  "devDependencies": {
+    "express": "^4.21.1",
+    "nodemon": "1.18.4"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "npm": "^10.9.0"
+  }
+}
+
